@@ -1,0 +1,60 @@
+                           _____________________
+
+                            PROJECT 3 QUESTIONS
+                           _____________________
+
+Project Instructions
+================
+
+    The following questions assume you have completed the code and will ask you
+    about what you observed. The questions are essay style and will be manually
+    graded. You should write at most one paragraph (roughly 3 to 5 sentences)
+    for each question that asks for an explanation. For the question that asks
+    you to calculate cache misses, you must show all of your work.
+
+
+1. CACHES AND CACHE MISSES
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+According to the "lscpu" command run on a Keller Hall 1-262 machine, the L1
+cache of a Keller 1-262 machine is 128 kilobytes (where 1 kilobyte = 1024
+bytes). Assume the cache has a 64-byte block size.
+
+Suppose we are running a C program on one of the Keller 1-262 machines that
+features an int array with 262,144 elements. Assume the array is aligned to the
+L1 cache's block size (i.e., the array's starting address is a multiple of 64).
+Our program performs a linear search over the array for a value that is not
+stored in the array.
+
+How many cache misses occur during this search? You should ignore the loop
+variable (e.g., "int i"). Make sure to show your work.
+
+First, I am going to miss my first int (4byte) because the data is not in cashe block, 
+then after importing data I have a 15 cashe hits because of 64-byte block size.
+So, 262,144 elements that each has 4 bytes, total misses are n / 16  == 262,144 / 16 = 16,384 misses (0, 64, 128, 192, 256, ...) 
+and 262,144 - 16,384 = 245,760 hits.
+
+2. WALL TIME AND CPU TIME
+~~~~~~~~~~~~~~~~~~~~~~~~~
+In the 'matrix_main.c', we measure both the CPU and wall time required for the
+functions to run. What is the difference between these two types of time
+measurement? When might we be interested in the wall time? CPU time? Which
+makes more sense to use for what we care about in this project?
+
+CPU time is the time an specific code took and it goes to sleep when FILE I/O whether reading/writing/opening/closing etc,
+while wall time keeps increasing when system calls like I/O. For my code, as you can see my wall and cpu time has the same time
+because I am not dealing much with system calls.
+
+3. LINEAR SEARCH 3-TIMES
+~~~~~~~~~~~~~~~~~~~~~~~~
+This question refers to the work you did in Lab 8. Refer back to this lab as
+needed to answer this question.
+
+We asked you to improve upon a provided version of the function "list_find".
+Why was the provided version inefficient? How did your improved version compare
+to performing the same search using an array instead of a linked list? Why do
+you think this is?
+
+The provided version was inefficient because every time it was calling another function that was finding a value for 
+the current i, such that it took O(n^2). I improved by creating a pointer to access the value of the ptr, which reduces
+to O(n). Arrays were faster than my optimized version of linked list because even though I reduced the run time, 
+array elements are contiguous in memory while linked list elements are scattered across different locations.
